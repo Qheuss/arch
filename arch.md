@@ -14,7 +14,7 @@ List all available drives to identify them:
 lsblk
 fdisk -l
 ```
-Based on your setup:
+Based on my setup:
 
 1TB SSD for system and programs (e.g., /dev/sda)
 2TB SSD for games (e.g., /dev/sdb)
@@ -22,7 +22,9 @@ Based on your setup:
 1TB SSD for Windows 11 (already installed, e.g., /dev/sdd)
 
 4. Partition Your System SSD (1TB)
-bashfdisk /dev/sda
+```bash
+fdisk /dev/sda
+```
 Create the following partitions:
 
 512MB EFI partition (type: EFI System)
@@ -30,48 +32,72 @@ Create the following partitions:
 Remainder for root partition (type: Linux filesystem)
 
 5. Partition Your Games SSD (2TB)
-bashfdisk /dev/sdb
+```bash
+fdisk /dev/sdb
+```
 Create a single large partition for games.
 6. Partition Your Backup SSD (500GB)
-bashfdisk /dev/sdc
+```bash
+fdisk /dev/sdc
+```
 Create a single partition for backups.
 7. Format the Partitions
-bash# Format EFI partition
+```bash
+# Format EFI partition
 mkfs.fat -F32 /dev/sda1
+```
 
 ## Format swap
+```bash
 mkswap /dev/sda2
 swapon /dev/sda2
+```
 
 ## Format root partition
+```bash
 mkfs.ext4 /dev/sda3
+```
 
 ## Format games partition
+```bash
 mkfs.ext4 /dev/sdb1
+```
 
 ## Format backup partition
+```bash
 mkfs.ext4 /dev/sdc1
+```
 8. Mount the Partitions
-bash# Mount root partition
+```bash
+# Mount root partition
 mount /dev/sda3 /mnt
+```
 
 ## Create and mount EFI directory
+```bash
 mkdir -p /mnt/boot/efi
 mount /dev/sda1 /mnt/boot/efi
+```
 
 ## Create and mount games directory
+```bash
 mkdir -p /mnt/mnt/games
 mount /dev/sdb1 /mnt/mnt/games
+```
 
 ## Create backup directory (will mount later)
+```bash
 mkdir -p /mnt/mnt/backup
+```
 9. Install Base System
+```bash
 bashpacstrap /mnt base linux linux-firmware base-devel nano
-10. Generate Fstab
+```
+11. Generate Fstab
 bashgenfstab -U /mnt >> /mnt/etc/fstab
-11. Chroot Into the System
+12. Chroot Into the System
 basharch-chroot /mnt
-12. Set Time Zone and Localization
+13. Set Time Zone and Localization
 bash# Set time zone for Brussels
 ln -sf /usr/share/zoneinfo/Europe/Brussels /etc/localtime
 hwclock --systohc
