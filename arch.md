@@ -32,15 +32,18 @@ Create the following partitions:
 Remainder for root partition (type: Linux filesystem)
 
 5. Partition Your Games SSD (2TB)
+
 ```bash
 fdisk /dev/sdb
 ```
 Create a single large partition for games.
+
 6. Partition Your Backup SSD (500GB)
 ```bash
 fdisk /dev/sdc
 ```
 Create a single partition for backups.
+
 7. Format the Partitions
 ```bash
 # Format EFI partition
