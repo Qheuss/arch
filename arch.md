@@ -1,4 +1,4 @@
-### Manual Arch Linux installation with AMD GPU and timezone:
+# Manual Arch Linux installation with AMD GPU and timezone:
 1. Boot from Arch Linux USB
 Boot from your Arch Linux USB drive and verify internet connection:
 bashping -c 3 archlinux.org
@@ -33,31 +33,31 @@ Create a single partition for backups.
 bash# Format EFI partition
 mkfs.fat -F32 /dev/sda1
 
-# Format swap
+## Format swap
 mkswap /dev/sda2
 swapon /dev/sda2
 
-# Format root partition
+## Format root partition
 mkfs.ext4 /dev/sda3
 
-# Format games partition
+## Format games partition
 mkfs.ext4 /dev/sdb1
 
-# Format backup partition
+## Format backup partition
 mkfs.ext4 /dev/sdc1
 8. Mount the Partitions
 bash# Mount root partition
 mount /dev/sda3 /mnt
 
-# Create and mount EFI directory
+## Create and mount EFI directory
 mkdir -p /mnt/boot/efi
 mount /dev/sda1 /mnt/boot/efi
 
-# Create and mount games directory
+## Create and mount games directory
 mkdir -p /mnt/mnt/games
 mount /dev/sdb1 /mnt/mnt/games
 
-# Create backup directory (will mount later)
+## Create backup directory (will mount later)
 mkdir -p /mnt/mnt/backup
 9. Install Base System
 bashpacstrap /mnt base linux linux-firmware base-devel nano
@@ -70,16 +70,16 @@ bash# Set time zone for Brussels
 ln -sf /usr/share/zoneinfo/Europe/Brussels /etc/localtime
 hwclock --systohc
 
-# Set locale
+## Set locale
 nano /etc/locale.gen
-# Uncomment en_US.UTF-8 UTF-8 (or your preferred locale)
+### Uncomment en_US.UTF-8 UTF-8 (or your preferred locale)
 locale-gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 13. Network Configuration
 bash# Set hostname to arch-qh as requested
 echo "arch-qh" > /etc/hostname
 
-# Configure hosts file
+## Configure hosts file
 nano /etc/hosts
 Add these lines:
 127.0.0.1   localhost
@@ -89,26 +89,26 @@ Add these lines:
 bash# Set root password
 passwd
 
-# Create your user
+## Create your user
 useradd -m -G wheel,audio,video,storage -s /bin/bash yourusername
 passwd yourusername
 
-# Install sudo
+## Install sudo
 pacman -S sudo
 EDITOR=nano visudo
-# Uncomment %wheel ALL=(ALL) ALL
+### Uncomment %wheel ALL=(ALL) ALL
 15. Install and Configure Bootloader
 bash# Install GRUB and required packages
 pacman -S grub efibootmgr os-prober
 
-# Enable OS prober to detect Windows
+## Enable OS prober to detect Windows
 nano /etc/default/grub
-# Add or uncomment: GRUB_DISABLE_OS_PROBER=false
+### Add or uncomment: GRUB_DISABLE_OS_PROBER=false
 
-# Install GRUB
+## Install GRUB
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
 
-# Generate GRUB config
+## Generate GRUB config
 grub-mkconfig -o /boot/grub/grub.cfg
 16. Install Networking Tools
 bashpacman -S networkmanager
@@ -138,13 +138,13 @@ bashpacman -S steam lutris wine-staging gamemode
 bash# Mount backup partition in fstab
 echo "UUID=$(blkid -s UUID -o value /dev/sdc1) /mnt/backup ext4 defaults 0 2" >> /etc/fstab
 
-# Install backup tool
+## Install backup tool
 pacman -S timeshift rsync
 26. Final Configuration
 bash# Install fonts
 pacman -S ttf-dejavu ttf-liberation noto-fonts
 
-# Install additional tools
+## Install additional tools
 pacman -S git wget curl
 27. Exit and Reboot
 bashexit
