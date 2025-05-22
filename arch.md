@@ -4,7 +4,7 @@
 
 - Temporarily disable Secure Boot
 
-  - Enter your ASRock BIOS settings (F2 or Delete key at startup)
+  - Enter your BIOS settings (F2 or Delete key at startup)
   - Navigate to the Security section
   - Set Secure Boot to "Disabled" or "Other OS"
   - Save and exit
