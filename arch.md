@@ -328,6 +328,24 @@ sudo os-prober
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
+To launch into i3:
+
+```bash
+# Only if not already done
+echo "exec i3" > ~/.xinitrc
+```
+
+```bash
+# Then when you want to start it just type:
+startx
+```
+
+To launch into Hyprland:
+
+```bash
+hyprland
+```
+
 Configure i3:
 
 ```bash
