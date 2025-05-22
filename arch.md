@@ -1,4 +1,4 @@
-Let's proceed with the manual Arch Linux installation with AMD GPU and timezone:
+### Manual Arch Linux installation with AMD GPU and timezone:
 1. Boot from Arch Linux USB
 Boot from your Arch Linux USB drive and verify internet connection:
 bashping -c 3 archlinux.org
