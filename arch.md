@@ -1,13 +1,19 @@
 # Manual Arch Linux installation with AMD GPU and timezone:
 1. Boot from Arch Linux USB
 Boot from your Arch Linux USB drive and verify internet connection:
-bashping -c 3 archlinux.org
-2. Update the System Clock
-bashtimedatectl set-ntp true
-3. Identify and Prepare Your Drives
+```bash
+ping -c 3 archlinux.org
+```
+3. Update the System Clock
+```bash
+timedatectl set-ntp true
+```
+4. Identify and Prepare Your Drives
 List all available drives to identify them:
-bashlsblk
+```bash
+lsblk
 fdisk -l
+```
 Based on your setup:
 
 1TB SSD for system and programs (e.g., /dev/sda)
