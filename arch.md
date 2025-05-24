@@ -239,7 +239,7 @@ pacman -S i3-wm i3status i3lock dmenu picom
 
 # Install Hyprland for everyday use
 pacman -S polkit xdg-desktop-portal-wlr
-pacman -S hyprland waybar wofi
+pacman -S hyprland waybar
 ```
 
 #### 19. Install Sound System
